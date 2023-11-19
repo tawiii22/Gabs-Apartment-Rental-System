@@ -214,7 +214,6 @@
                             <button type="submit" class="btn btn-success form-control" id="reserveBtn">Reserve Now</button>
                 </div>
                 </form>
-jhgjgh
             </div>
         </div>
     </div>
