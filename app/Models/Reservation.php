@@ -15,7 +15,8 @@ class Reservation extends Model
         'gender',
         'email',
         'contact_no',
-        'status'
+        'status',
+        'bed_number'
     ];
 
     public function guest_house() {

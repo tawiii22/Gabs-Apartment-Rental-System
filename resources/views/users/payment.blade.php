@@ -32,18 +32,31 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                         <label class="form-check-label" for="flexRadioDefault1">
-                          Male
+                             Male
                         </label>
                       </div>
                       <div class="form-check">
                         <input class="form-check-input" value="Female" type="radio" name="gender" id="flexRadioDefault2" >
                         <label class="form-check-label" for="flexRadioDefault2">
-                          Female
+                            Female
                         </label>
                       </div>
+                        @for ($i = 0; $i < count($listing->beds); $i++)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="bed_number" type="radio" id="inlineCheckbox1" value="{{$i+1}}">
+                                <input class="form-check-input" type="hidden" name="bed_id" id="inlineCheckbox1" value="{{$listing->beds[$i]->id}}">
+                                <label class="form-check-label" for="inlineCheckbox1">Bed {{$i+1}} 
+                                    <button class="btn {{ $listing->beds[$i]->status ? "btn-success" : "btn-danger" }}">{{ $listing->beds[$i]->status ? "Available" : "Not available" }}</button>
+                                </label>
+                            </div>
+                        @endfor 
+                        @error('bed')
+                        <p class="text-danger">{{ $message }}</p>
+                        @enderror
                         <input type="hidden" name="payment_process" value="walk in">
-                        <input type="hidden" name="room_id" value="{{ $guesthouse->id }}">
+                        <input type="hidden" name="room_id" value="{{ $listing->id }}">
                         <input type="hidden" name="status" id="status" value="pending">
+                        <br>
                         <button class="btn btn-primary" id="confirmBtn">Book</button>
                         <!-- <div class="paypal-button-container mt-3" id="paypal-button-container"></div> -->
                     </form>
@@ -53,15 +66,17 @@
 
                 <div class="row m-3">
                     <div class="col-lg-12 text-center">
-                        <img src="{{ asset('images/room1.png') }}" id="room_image" class="rounded img-fluid mx-auto d-block m-2" style="max-width: 150px; max-height: 150px;">
-                        <label><h4>  {{ $guesthouse->room_name }}  </h4></label>
-                        <p><h6>  {{ $guesthouse->room_details }}  </h6></p>
+                        <img src="{{ asset('images/room.jpg') }}" id="room_image" class="rounded img-fluid mx-auto d-block m-2" style="max-width: 150px; max-height: 150px;">
+                        <label><h4>  {{ $listing->room_name }}  </h4></label>
+                        <p><h6>  {{ $listing->room_details }}  </h6></p>
+                        room type {{ $listing->room_gender }}
+                        
                         </div>
                     </div>
                     <div class="col-lg-12 mt-3 text-center"><br>
                     <hr>
                         <h5>Price Details</h5>
-                        <div class="row text-end"><h6 class="">  ₱{{ $guesthouse->room_price }} monthly  </h6></div>
+                        <div class="row text-end"><h6 class="">  ₱{{ $listing->room_price }} monthly  </h6></div>
                     </div>
                 </div>
 

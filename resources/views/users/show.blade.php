@@ -1,5 +1,5 @@
 @extends('master')
-@section('title', $guesthouse->room_name )
+@section('title', $listing->room_name )
 
 @section('content')
 <style>
@@ -137,17 +137,22 @@
 <div class="container" style="margin-bottom: 100px;">
     <div class="row">
         <div class="col-12">
-        <h1 id="house_title">{{$guesthouse->room_name}}  </h1>  
+        <h1 id="house_title">{{$listing->room_name}}  </h1>  
         </div>
         
         @php 
-            $room_image = explode(',', $guesthouse->room_image);
+            $room_image = explode(',', $listing->room_image);
         @endphp
     </div>
     <div class="row mb-2">
         
         <div class="col-8 text-start">
-            <i class="fa-solid fa-location-dot" style="color: red;"></i> Located in - <span style="text-decoration: underline;"> {{ $guesthouse->room_location }} </span> 
+            <i class="fa-solid fa-location-dot" style="color: red;"></i> Located in - <span style="text-decoration: underline;"> {{ $listing->room_location }} </span> 
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-8 text-start">
+            heloo
         </div>
     </div>
     <div class="row">
@@ -196,21 +201,30 @@
             <div class="h4 text-dark">About this place</div>
             <ul>
                 <li>
-                    <div class="h5 mx-5 text-dark" id="house_desc"> {{ $guesthouse->room_details }} </div>
+                    <div class="h5 mx-5 text-dark" id="house_desc"> {{ $listing->room_details }} </div>
                 </li>
                 <li>
-                    <div class="h5 mx-5 text-dark" id="house_location"> Located in {{ $guesthouse->room_location }} </div>
+                    <div class="h5 mx-5 text-dark" id="house_location"> Located in {{ $listing->room_location }} </div>
                 </li>
+               
+                @for ($i = 0; $i < count($listing->beds); $i++)
+                <li>
+                    <div class="h5 mx-5 text-dark" id="house_location"> Bed {{$i+1}}
+                        <button class="btn {{ $listing->beds[$i]->status ? "btn-success" : "btn-danger" }}">{{ $listing->beds[$i]->status ? "Available" : "Not available" }}</button>    
+                    </div>
+                </li>
+                @endfor
+                
             </ul>
             <hr>
         <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
             <div class="card">
-                <form method="get" action="/payment/{{ $guesthouse->id }}">
+                <form method="get" action="/payment/{{ $listing->id }}">
                     @csrf
                 <div class="card-body">
                     <h3 class="card-title">Price details</h3>
                     <p class="card-text">Monthly Fee <label for="" style="margin-left: 135px;"
-                            id="house_price">₱{{ $guesthouse->room_price }}</label></p>
+                            id="house_price">₱{{ $listing->room_price }}</label></p>
                             <button type="submit" class="btn btn-success form-control" id="reserveBtn">Reserve Now</button>
                 </div>
                 </form>
@@ -228,7 +242,7 @@
        
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <form method="POST" action="/rooms/{{$guesthouse->id}}">
+          <form method="POST" action="/rooms/{{$listing->id}}">
             @csrf
             @method('DELETE')
             <button type="button submit" class="btn btn-danger">Delete</button>
@@ -257,7 +271,7 @@
 
 <!-- <div class="modal fade" id="rate_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-    <form action="/rooms/rate/{{ $guesthouse->id }}" method="POST">
+    <form action="/rooms/rate/{{ $listing->id }}" method="POST">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Rate this guest house</h1>
@@ -326,7 +340,7 @@
             type: 'POST',
             data: {
                 user_id: "{{ auth()->user()->id }}",
-                room_id: "{{ $guesthouse->id }}",
+                room_id: "{{ $listing->id }}",
                 _token: " {{ csrf_token() }} "
             },
             success: function(data) {
@@ -406,6 +420,6 @@ $(document).ready(function() {
 
 
 </script>
-<!-- @include('partials._footer') -->
+<!-- @include('components._footer') -->
 
 @endsection

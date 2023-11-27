@@ -5,50 +5,48 @@
     <table class="table table-bordered border-primary">
         <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Contact #</th>
-              <th scope="col">Room type</th>
-              <th scope="col">Email</th>
-              <th scope="col">Gender</th>
-              <th scope="col">Date</th>
-              <th scope="col">Payment</th>
-              <th scope="col">Remark</th>
+                <th scope="col">Name</th>
+                <th scope="col">Contact #</th>
+                <th scope="col">Room type</th>
+                <th scope="col">email</th>
+                <th scope="col">Date</th>
+                <th scope="col">Date</th>
+                
             </tr>
+            
           </thead>
           <tbody>
+            @foreach ($reservations as $reservation)
             <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>Otto</td>
-              <td>Otto</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>
-                <button class="btn btn-danger">
-                    he
-                </button>
+                <td>{{ $reservation->fullname }}</td>
+                <td>{{ $reservation->contact_no }}</td>
+                <td>{{ $reservation->id }}</td>
+                <td>{{ $reservation->email }}</td>
+                <td>{{ $reservation->created_at }}</td>
+                <td>
+                    <form action="/reservation/add-date/{{ $reservation->id }}" method="POST">
+                        @csrf
+                        <input type="date">
+                        <button class="btn btn-sm btn-success" type="submit">
+                            Paid
+                        </button>
+                    </form>
                 </td>
-              <td>Otto</td>
-
+                
+                {{-- <td>{{ $reservation->created_at->format('F d, Y') }}
+                    <br>
+                    {{ $reservation->created_at->format('F d, Y') }}
+                </td> --}}
+                {{-- <td>
+                    <button class="btn btn-success">
+                        Paid
+                    </button><i class="bi bi-plus-lg"></i>
+                    <button class="btn btn-danger">
+                        Unpaid
+                    </button>
+                </td> --}}
             </tr>
-            <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>
-                      <button class="btn btn-danger">
-                          he
-                      </button>
-                      </td>
-              <td>Otto</td>
-
-                  </tr>
+            @endforeach
             
           </tbody>
       </table>

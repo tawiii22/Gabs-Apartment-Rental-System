@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container text-center bg-white">
-   <form method="POST" action="/admin/update-room/{{ $guesthouse->id }}" enctype="multipart/form-data">
+   <form method="POST" action="/admin/update-room/{{ $listing->id }}" enctype="multipart/form-data">
     @csrf
     <div class="row justify-content-around">
       <h1 class="mt-2">CREATE NEW GUEST HOUSE</h1>
@@ -11,7 +11,7 @@
       <div class="col-8">
       <div class="form-group">
       <label for="roomName" class="mb-2">Room Name</label>
-      <input type="text" class="form-control rounded-pill"  id="roomName" name="room_name" value="{{ $guesthouse->room_name }}" >
+      <input type="text" class="form-control rounded-pill"  id="roomName" name="room_name" value="{{ $listing->room_name }}" >
       @error('room_name')
           <p class="text-danger mt-1"> {{ $message }} </p>
       @enderror
@@ -19,7 +19,7 @@
 
     <div class="form-group">
       <label for="room_image" class="mb-2">Room Images (minimum 5 images)</label>
-      <input type="file" multiple class="form-control rounded-pill"  id="room_image" name="room_image[]" value="{{ $guesthouse->room_image }}" >
+      <input type="file" multiple class="form-control rounded-pill"  id="room_image" name="room_image[]" value="{{ $listing->room_image }}" >
       @error('room_image')
           <p class="text-danger mt-1"> {{ $message }} </p>
       @enderror
@@ -27,7 +27,7 @@
     
     <div class="form-group">
         <label for="roomDetails" class="mb-2">Room Description</label>
-        <textarea class="form-control rounded" id="roomDetails" name="room_details" rows="3" > {{ $guesthouse->room_details }} </textarea>
+        <textarea class="form-control rounded" id="roomDetails" name="room_details" rows="3" > {{ $listing->room_details }} </textarea>
         @error('room_details')
           <p class="text-danger mt-1"> {{ $message }} </p>
         @enderror
@@ -47,7 +47,7 @@
           </div>
             <div class="col-6">
                 <label for="room_img" class="mb-2">Room Price</label>
-                <input type="text" class="form-control rounded-pill" id="roomPrice" name="room_price" value="{{ $guesthouse->room_name }}">
+                <input type="text" class="form-control rounded-pill" id="roomPrice" name="room_price" value="{{ $listing->room_name }}">
                 @error('room_price')
                     <p class="text-danger mt-1"> {{ $message }} </p>
                 @enderror

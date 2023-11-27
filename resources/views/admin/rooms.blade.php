@@ -31,8 +31,19 @@
             {{$room->room_gender}}
           <h5 class="card-title">{{ $room->room_name }}</h5>
           <p class="card-text">{{ $room->room_details }}</p>
+            @for ($i = 0; $i < count($room->beds); $i++)
+                Bed {{$i+1}}
+                <div class="row">
+                   <div class="col-4">
+                    <button class="btn btn-success btn-sm">Available</button>    
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-danger btn-sm">Not available</button>  </div>  
+                </div>
+            @endfor
+            
           <a href="/admin/edit-room/{{$room->id}}">
-              <button class="btn btn-primary">Edit</button>
+              <button class="btn btn-primary mt-2">Edit</button>
             </a>
         </div>
       </div>

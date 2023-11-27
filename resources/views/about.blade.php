@@ -1,6 +1,6 @@
 @extends('master')
 
-@include('partials._navbar')
+@include('components._navbar')
 
 @section('content')
 

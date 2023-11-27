@@ -1,19 +1,20 @@
 <?php
 
+use App\Models\User;
+use App\Models\Listing;
+use App\Models\Wishlist;
 use App\Models\GuestHouses;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\GuestHouseController;
-use App\Http\Controllers\RatingController;
-use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AdminController;
-use App\Models\Reservation;
-use App\Models\User;
-use App\Models\Wishlist;
+use App\Http\Controllers\RatingController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\ListingController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,10 +55,10 @@ Route::get('/admin/inventory', [AdminController::class, 'inventory']);
 Route::get('/dashboard/reservations', [HomeController::class, 'show'])->middleware('auth');
 Route::post('/admin/cancel-reservation/{reservation}', [ReservationController::class, 'cancel']);
 Route::post('/admin/approve-reservation/{reservation}', [ReservationController::class, 'approve']);
-Route::get('/admin/add-room', [GuestHouseController::class, 'create']);
-Route::get('/admin/edit-room/{room}', [GuestHouseController::class, 'edit']);
-Route::post('/admin/update-room/{room}', [GuestHouseController::class, 'update']);
-Route::post('/admin/guesthouses/create', [GuestHouseController::class, 'store']);
+Route::get('/admin/add-room', [ListingController::class, 'create']);
+Route::get('/admin/edit-room/{room}', [ListingController::class, 'edit']);
+Route::post('/admin/update-room/{room}', [ListingController::class, 'update']);
+Route::post('/admin/guesthouses/create', [ListingController::class, 'store']);
 
 Route::get('/about', function () {
     return view('about');
@@ -65,13 +66,13 @@ Route::get('/about', function () {
 
 
 Route::get('/confirmation', function () {
-    return view('confirmation');
+    return view('users.confirmation');
 });
 Route::get('/', function () {
     return view('landing-page');
 });
 Route::get('/rooms', function () {
-    return view('guesthouses.index', ['guesthouses' => GuestHouses::all()]);
+    return view('users.index', ['listings' => Listing::all()]);
 });
 Route::get('/logout', [UserController::class, 'logout']);
 Route::get('/register', [UserController::class, 'create']);
@@ -83,13 +84,14 @@ Route::get('/users/index', [UserController::class, 'index'])->middleware('auth')
 Route::delete('/users/delete', [UserController::class, 'delete'])->middleware('auth');
 Route::put('/account/update/profile_pic', [UserController::class, 'add_profile_pic'])->middleware('auth');
 
-Route::get('/payment/{guesthouse}', [GuestHouseController::class, 'payment']);
-Route::delete('/rooms/{guesthouse}', [GuestHouseController::class, 'destroy']);
-Route::get('/rooms/{id}', [GuestHouseController::class, 'show']);
-Route::put('/rooms/update/{guesthouse}', [GuestHouseController::class, 'update'])->middleware('auth');
-Route::get('rooms/{guesthouse}/edit', [GuestHouseController::class, 'edit'])->middleware('auth');
-Route::get('rooms/{guesthouse}/delete', [GuestHouseController::class, 'delete'])->middleware('auth');
-Route::get('/guesthouses/create', [GuestHouseController::class, 'create'])->middleware('auth');
+Route::get('/payment/{listing}', [ListingController::class, 'payment']);
+Route::delete('/rooms/{guesthouse}', [ListingController::class, 'destroy']);
+Route::get('/rooms/{listing}', [ListingController::class, 'show']);
+Route::put('/rooms/update/{guesthouse}', [ListingController::class, 'update'])->middleware('auth');
+Route::get('rooms/{guesthouse}/edit', [ListingController::class, 'edit'])->middleware('auth');
+Route::get('rooms/{guesthouse}/delete', [ListingController::class, 'delete'])->middleware('auth');
+Route::get('/guesthouses/create', [ListingController::class, 'create'])->middleware('auth');
+Route::post('/reservation/add-date/{reservation}', [ReservationController::class, 'add_date']);
 
 Route::get('/search', [SearchController::class, 'search']);
 

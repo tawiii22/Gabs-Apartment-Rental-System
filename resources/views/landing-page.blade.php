@@ -98,6 +98,6 @@
   </div>
 </nav>
 <img src="{{asset('images/room1.jpg')}}" alt="" class="img-fluid" width="100%" height="100%">
-<!-- @include('partials._footer') -->
+<!-- @include('components._footer') -->
 
 @endsection

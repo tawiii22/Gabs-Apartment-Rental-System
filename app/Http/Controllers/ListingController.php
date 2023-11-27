@@ -2,46 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GuestHouses;
+use App\Models\Bed;
+use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Faker\Provider\Image;
 
 use function PHPSTORM_META\type;
 
-class GuestHouseController extends Controller
+class ListingController extends Controller
 {
-    //show all guest houses
     public function index() {
-        //dd(request('search'));
-
-        $guesthouses = GuestHouses::latest()->filter(request(['search']))->get();
-
-        return view('guesthouses.index', [
-            'guesthouses' => $guesthouses
+        $listings = Listing::latest()->filter(request(['search']))->get();
+        return view('users.index', [
+            'listings' => $listings
         ]);
     }
 
-    //show singular guest house
-    public function show(GuestHouses $id) {
-        return view('guesthouses.show', ['guesthouse' => $id]);
+    public function show(Listing $listing) {
+
+        $listing->beds = Bed::where('room_id', $listing->id)->get();
+        return view('users.show', ['listing' => $listing]);
     }
 
-    //create guest house
     public function create() {
         return view('admin.add-room');
     }
 
-    public function payment(Request $request, GuestHouses $guesthouse) {
+    public function payment(Request $request, Listing $listing) {
 
-        return view('guesthouses.payment', ['guesthouse' => $guesthouse]);
+        $listing->beds = Bed::where('room_id', $listing->id)->get();
+        return view('users.payment', ['listing' => $listing]);
     }
 
-    public function edit(GuestHouses $room) {
-        return view('admin.edit-room', ['guesthouse' => $room]);
+    public function edit(Listing $room) {
+        return view('admin.edit-room', ['listing' => $room]);
     }
 
-    public function update(GuestHouses $room, Request $request) {
+    public function update(Listing $room, Request $request) {
         $houseImages = '';
         $uploadedFiles = $request->file('room_image');
         if($uploadedFiles == null) {
@@ -78,15 +76,6 @@ class GuestHouseController extends Controller
         return redirect('/admin/rooms');
     }
 
-    public function destroy(GuestHouses $guesthouse) {
-        $wishlist = Wishlist::where('room_id', $guesthouse->id)->get();
-        $wishlist->each->delete();
-        $guesthouse->delete();
-
-        return redirect('/')->with('message', "GUEST HOUSE DELETED SUCCESSFULLY!");
-    }
-
-    //store guest hoseu data 
     public function store(Request $request) {
         $houseImages = '';
         $uploadedFiles = $request->file('room_image');
@@ -108,9 +97,16 @@ class GuestHouseController extends Controller
 
         $form['room_image'] = $houseImages;
 
-        GuestHouses::create($form);
-
-        return redirect('/admin/rooms')->with('message', ' GUEST HOUSE ADDED SUCCESSFULLY!');
+        $listing = Listing::create($form);
+        for($i = 0; $i < 4; $i++) {
+            $bed = [
+                'room_id' => $listing->id,
+                'bed_number' => $i+1,
+                'status' => true
+            ];
+            Bed::create($bed);
+        }
+        return redirect('/admin/rooms')->with('message', ' ADDED SUCCESSFULLY!');
 
     }
 

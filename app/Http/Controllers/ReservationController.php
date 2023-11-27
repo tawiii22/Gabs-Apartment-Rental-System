@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GuestHouses;
+use App\Models\Bed;
+use App\Models\Listing;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,11 @@ class ReservationController extends Controller
             'email' => 'required',
             'contact_no' => 'required',
             'gender' => 'required',
+            'bed_number' => 'required',
         ]);
+        $bed = Bed::where('room_id', $request->room_id)->where('bed_number', $request->bed_number)->first();
+        $bed->status = 0;
+        $bed->update();
         $reservation['status'] = 'pending';
         Reservation::create($reservation);
         return redirect('/confirmation');
@@ -40,13 +45,6 @@ class ReservationController extends Controller
         Reservation::destroy($request->id);
         return response()->json(['response' => 'EURT BHIE!', 'request' => $request->all()]);
     }
-
-    // public function cancel(Request $request) {
-    //     $reservation = Reservation::find($request->id);
-    //     $reservation->status = 'cancelled';
-    //     $reservation->save();
-    //     return response()->json(['response' => "ABOT DIRE!", 'request' => $request->all()]);
-    // }
 
     public function sort(Request $request, $sort) {
         $query = Reservation::query();

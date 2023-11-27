@@ -42,7 +42,9 @@
 
 <body>
 
-<button class="btn btn-danger">Logout</button>
+  <form action="/logout" method="GET">
+    <button class="btn btn-danger">Logout</button>
+  </form>
 
     <div class="row">
         <div class="col-3">

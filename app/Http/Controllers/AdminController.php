@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\GuestHouses;
+
+use App\Models\Bed;
+use App\Models\Listing;
 use App\Models\Reservation;
 
 use Illuminate\Http\Request;
@@ -14,10 +16,15 @@ class AdminController extends Controller
     }
     public function rooms(?string $gender = null) {
         if($gender) {
-            return view('admin.rooms', ['rooms' => GuestHouses::where('room_gender', $gender)->get()]);
+            return view('admin.rooms', ['rooms' => Listing::where('room_gender', $gender)->get()]);
         }
 
-        return view('admin.rooms', ['rooms' => GuestHouses::all()]);
+        $rooms = Listing::all();
+        foreach($rooms as $room) {
+            $room->beds = Bed::where('room_id', $room->id)->get();
+        }
+
+        return view('admin.rooms', ['rooms' => $rooms]);
         
     }
     public function pending() {
@@ -25,7 +32,7 @@ class AdminController extends Controller
         
     }
     public function monitoring() {
-        return view('admin.monitoring');
+        return view('admin.monitoring', ['reservations' => Reservation::where('status', 'approved')->get()]);
     }
     public function transactions() {
         return view('admin.transaction', ['reservations' => Reservation::where('status', 'approved')->get()]);
