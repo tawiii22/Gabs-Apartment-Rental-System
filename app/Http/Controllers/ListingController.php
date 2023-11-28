@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bed;
+use App\Models\Review;
 use App\Models\Listing;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Faker\Provider\Image;
-
-use function PHPSTORM_META\type;
+use Illuminate\Support\Facades\DB;
 
 class ListingController extends Controller
 {
     public function index() {
-        $listings = Listing::latest()->filter(request(['search']))->get();
+        $listings = Listing::latest()->get();
+        foreach($listings as $listing) {
+            $reviews = DB::table('reviews')->where('room_id', $listing->id)->sum('rating');
+            $reviewsCount = DB::table('reviews')->where('room_id', $listing->id)->count();
+            $listing->averageRating = $reviews / ($reviewsCount == 0 ? 1 : $reviewsCount);
+        }
         return view('users.index', [
             'listings' => $listings
         ]);
@@ -22,6 +25,7 @@ class ListingController extends Controller
     public function show(Listing $listing) {
 
         $listing->beds = Bed::where('room_id', $listing->id)->get();
+        $listing->reviews = Review::where('room_id', $listing->id)->get();
         return view('users.show', ['listing' => $listing]);
     }
 

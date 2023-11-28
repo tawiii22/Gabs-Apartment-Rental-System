@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
-use Faker\Provider\Image;
+use App\Models\Bed;
 
+use App\Models\Listing;
+use Faker\Provider\Image;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -29,7 +31,6 @@ class ListingFactory extends Factory
 
         $room_images_string = implode(',', $room_images);
 
-
         return [
             'room_name' => $this->faker->company(),
             'room_details' => $this->faker->sentence(9),
@@ -37,5 +38,20 @@ class ListingFactory extends Factory
             'room_image' => $room_images_string,
             'room_gender' => $this->faker->randomElement(['for-boys', 'for-girls'])
         ];
+
     }
+
+    public function configure()
+        {
+            return $this->afterCreating(function (Listing $listing) {
+                for($i = 1; $i <= 4; $i++) {
+                    Bed::factory(1)->create([
+                        'room_id' => $listing->id,
+                        'bed_number' => $i,
+                        'status' => true
+                    ]);
+                }
+            });
+        }
+
 }

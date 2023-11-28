@@ -17,15 +17,8 @@ class Listing extends Model
         'room_gender'
     ];
 
-    public function scopeFilter($query, array $filters) {
-
-        if($filters['search'] ?? false) {
-            $query->where('room_name', 'LIKE', '%'. request('search') .'%')
-            ->orWhere('room_details', 'LIKE', '%'. request('search') .'%')
-            ->orWhere('room_location', 'LIKE', '%'. request('search') .'%')
-            ->orWhere('room_price', 'LIKE', '%'. request('search') .'%');
-        }
-
+    public function beds() {
+        return $this->hasMany(Bed::class);
     }
 
 }

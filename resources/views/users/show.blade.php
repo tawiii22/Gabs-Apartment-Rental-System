@@ -169,8 +169,9 @@
             </div>
             <div class="row">
                 <div class="col-12">
+                    
                     <img src="{{ asset('images/'.$room_image[2]) }}" id="" onclick="openFullscreen(this)"
-                        class="img-fluid object-fit-cover ms-2" style="height: 175px; margin-top: 5px;">
+                        class="img-fluid object-fit-cover ms-2" style="height: 175px; width: 400px; margin-top: 5px;">
                 </div>
             </div>
         </div>
@@ -217,6 +218,58 @@
                 
             </ul>
             <hr>
+            <div class="row">
+                <h4>Rate this guest house </h4>
+            <div class="col">
+                <div class="row">
+                    
+                </div>
+                <div class="row">
+                    
+                    <div class="col">
+                        @error('rating')
+                            <p class="text-danger"> {{ $message}} </p>
+                        @enderror
+                        <button data-bs-toggle="modal" class="btn" data-bs-target="#rate_modal">
+                            <span class="fa fa-star" id="star0"></span>
+                            <span class="fa fa-star" id="star1"></span>
+                            <span class="fa fa-star" id="star2"></span>
+                            <span class="fa fa-star" id="star3"></span>
+                            <span class="fa fa-star" id="star4"></span>
+                        </button>
+                    </div>
+                </div>
+
+                @foreach ($listing->reviews as $review)
+                    
+                <div class="col-5 m-2 border">
+                    <div class="row mt-2">
+                        <div class="col-1">
+                            <img src="{{ asset('images/profile/baby.jpg' ) }}" class="profile_avatar" alt="">
+                        </div>
+                        <div class="col-10 ms-3 mt-2 ">
+                            <span class="fw-bold"> {{ $review->name }} </span>
+                            <div class="row">
+                                <div class="col">
+                                    <span class="fa fa-star" style="color:{{ $review->rating >= 0 ? "rgb(255, 190, 11)" : "" }}"></span>
+                                    <span class="fa fa-star" style="color:{{ $review->rating >= 1 ? "rgb(255, 190, 11)" : "" }}"></span>
+                                    <span class="fa fa-star" style="color:{{ $review->rating >= 2 ? "rgb(255, 190, 11)" : "" }}"></span>
+                                    <span class="fa fa-star" style="color:{{ $review->rating >= 3 ? "rgb(255, 190, 11)" : "" }}"></span>
+                                    <span class="fa fa-star" style="color:{{ $review->rating >= 4 ? "rgb(255, 190, 11)" : "" }}"></span>
+                                    <span> - {{ $review->created_at->diffForHumans() }} </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-1">
+                        {{ $review->review }}
+                    </div>
+                </div>
+                @endforeach
+                
+            </div>
+        </div>
+
         <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
             <div class="card">
                 <form method="get" action="/payment/{{ $listing->id }}">
@@ -232,25 +285,6 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="delete_guest_house_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Guest House</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-       
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <form method="POST" action="/rooms/{{$listing->id}}">
-            @csrf
-            @method('DELETE')
-            <button type="button submit" class="btn btn-danger">Delete</button>
-        </form>
-        </div>
-      </div>
-    </div>
-  </div>
 <div class="offcanvas offcanvas-container" tabindex="-1" id="imageOffcanvas" aria-labelledby="imageOffcanvasLabel">
     <div class="offcanvas-content">
         <div class="offcanvas-header">
@@ -269,7 +303,7 @@
     </div>
 </div>
 
-<!-- <div class="modal fade" id="rate_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="rate_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <form action="/rooms/rate/{{ $listing->id }}" method="POST">
       <div class="modal-content">
@@ -286,6 +320,7 @@
                     <span class="fa fa-star" id="modal_star3"></span>
                     <span class="fa fa-star" id="modal_star4"></span>
                 </div>
+                <input type="text" name="name" class="form-control mb-2" placeholder="Your name">
                 <input type="hidden" name="rating" id="rating">
                 @error('rating')
                     <p class="text-danger"> {{ $message}} </p>
@@ -298,7 +333,7 @@
       </div>
     </form>
     </div>
-  </div> -->
+  </div> 
 
 <script>
     function openFullscreen(img) {

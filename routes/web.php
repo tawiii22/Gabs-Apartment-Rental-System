@@ -12,9 +12,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReservationDateController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,11 +40,11 @@ use App\Http\Controllers\ReservationController;
 
 
 Route::post('/reservation/confirm', [ReservationController::class, 'store']);
-Route::delete('/reservation/delete', [ReservationController::class, 'delete'])->middleware('auth');
-Route::put('/reservation/cancel', [ReservationController::class, 'cancel'])->middleware('auth');
-Route::get('/reservation/sort/{sort}', [ReservationController::class, 'sort'])->middleware('auth');
+// Route::delete('/reservation/delete', [ReservationController::class, 'delete'])->middleware('auth');
+// Route::put('/reservation/cancel', [ReservationController::class, 'cancel'])->middleware('auth');
+// Route::get('/reservation/sort/{sort}', [ReservationController::class, 'sort'])->middleware('auth');
 
-Route::post('/rooms/rate/{guesthouse_id}', [RatingController::class, 'store'])->middleware('auth');
+Route::post('/rooms/rate/{listing}', [ReviewController::class, 'store']);
 
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 Route::get('/admin/rooms/{gender?}', [AdminController::class, 'rooms']);
@@ -71,18 +73,13 @@ Route::get('/confirmation', function () {
 Route::get('/', function () {
     return view('landing-page');
 });
-Route::get('/rooms', function () {
-    return view('users.index', ['listings' => Listing::all()]);
-});
+// Route::get('/rooms', function () {
+//     return view('users.index', ['listings' => Listing::all()]);
+// });
+Route::get('/rooms', [ListingController::class, 'index']);
 Route::get('/logout', [UserController::class, 'logout']);
-Route::get('/register', [UserController::class, 'create']);
-Route::post('/register', [UserController::class, 'store']);
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
-Route::get('/account', [UserController::class, 'show'])->middleware('auth');
-Route::get('/users/index', [UserController::class, 'index'])->middleware('auth');
-Route::delete('/users/delete', [UserController::class, 'delete'])->middleware('auth');
-Route::put('/account/update/profile_pic', [UserController::class, 'add_profile_pic'])->middleware('auth');
 
 Route::get('/payment/{listing}', [ListingController::class, 'payment']);
 Route::delete('/rooms/{guesthouse}', [ListingController::class, 'destroy']);
@@ -91,7 +88,7 @@ Route::put('/rooms/update/{guesthouse}', [ListingController::class, 'update'])->
 Route::get('rooms/{guesthouse}/edit', [ListingController::class, 'edit'])->middleware('auth');
 Route::get('rooms/{guesthouse}/delete', [ListingController::class, 'delete'])->middleware('auth');
 Route::get('/guesthouses/create', [ListingController::class, 'create'])->middleware('auth');
-Route::post('/reservation/add-date/{reservation}', [ReservationController::class, 'add_date']);
+Route::post('/reservation/add-date/{reservation}', [ReservationDateController::class, 'store']);
 
 Route::get('/search', [SearchController::class, 'search']);
 

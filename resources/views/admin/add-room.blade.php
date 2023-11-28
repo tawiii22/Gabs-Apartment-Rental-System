@@ -6,7 +6,7 @@
    <form method="POST" action="/admin/guesthouses/create" enctype="multipart/form-data">
     @csrf
     <div class="row justify-content-around">
-      <h1 class="mt-2">CREATE NEW GUEST HOUSE</h1>
+      <h1 class="mt-2">CREATE NEW ROOM</h1>
 
       <div class="col-8">
       <div class="form-group">

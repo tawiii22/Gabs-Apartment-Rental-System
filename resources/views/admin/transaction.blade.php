@@ -5,7 +5,7 @@
     <table class="table table-bordered border-primary">
         <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">Bed no.</th>
               <th scope="col">Name</th>
               <th scope="col">Contact #</th>
               <th scope="col">Room type</th>
@@ -18,7 +18,7 @@
           <tbody>
             @foreach ($reservations as $reservation)
             <tr>
-                <th scope="row">{{ $reservation->id }}</th>
+                <th scope="row">{{ $reservation->bed_number }}</th>
                 <td>{{ $reservation->fullname }}</td>
                 <td>{{ $reservation->contact_no }}</td>
                 <td>{{ $reservation->id }}</td>

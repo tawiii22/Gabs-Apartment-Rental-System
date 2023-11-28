@@ -22,11 +22,18 @@
                 <td>{{ $reservation->contact_no }}</td>
                 <td>{{ $reservation->id }}</td>
                 <td>{{ $reservation->email }}</td>
-                <td>{{ $reservation->created_at }}</td>
+                <td>
+                    {{-- {{ $reservation->created_at }} --}}
+                    @foreach ($reservation->booked_date as $date)
+                        {{$date->booked_date}} {{$date->status}}
+                        <br>
+                    @endforeach
+                
+                </td>
                 <td>
                     <form action="/reservation/add-date/{{ $reservation->id }}" method="POST">
                         @csrf
-                        <input type="date">
+                        <input type="date" name="date">
                         <button class="btn btn-sm btn-success" type="submit">
                             Paid
                         </button>

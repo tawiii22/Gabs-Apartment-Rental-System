@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Bed;
 use App\Models\Listing;
 use App\Models\Reservation;
+use App\Models\ReservationDate;
+use DateTime;
 use Illuminate\Http\Request;
 
 use function Symfony\Component\String\b;
@@ -21,11 +23,20 @@ class ReservationController extends Controller
             'gender' => 'required',
             'bed_number' => 'required',
         ]);
+
         $bed = Bed::where('room_id', $request->room_id)->where('bed_number', $request->bed_number)->first();
         $bed->status = 0;
         $bed->update();
         $reservation['status'] = 'pending';
-        Reservation::create($reservation);
+        $reservation = Reservation::create($reservation);
+
+        $reservation_dates = [
+            'reservation_id' => $reservation->id,
+            'booked_date' => $reservation->created_at,
+            'status' => 'unpaid'
+        ];
+        ReservationDate::create($reservation_dates);
+
         return redirect('/confirmation');
     }
 
@@ -72,6 +83,10 @@ class ReservationController extends Controller
         }
 
         return view('dashboard.reservation',(['reservations' => $reservations]));
+    }
+
+    public function add_date(Request $request) {
+        dd($request);
     }
 
 }

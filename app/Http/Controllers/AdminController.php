@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bed;
 use App\Models\Listing;
 use App\Models\Reservation;
-
+use App\Models\ReservationDate;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,8 +15,15 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
     public function rooms(?string $gender = null) {
+        
+        
+
         if($gender) {
-            return view('admin.rooms', ['rooms' => Listing::where('room_gender', $gender)->get()]);
+            $rooms = Listing::where('room_gender', $gender)->get();
+            foreach($rooms as $room) {
+                $room->beds = Bed::where('room_id', $room->id)->get();
+            }
+            return view('admin.rooms', ['rooms' => $rooms]);
         }
 
         $rooms = Listing::all();
@@ -28,14 +35,29 @@ class AdminController extends Controller
         
     }
     public function pending() {
-        return view('admin.pending', ['reservations' => Reservation::where('status', 'pending')->get()]);
+
+        $reservations = Reservation::where('status', 'pending')->get();
+        foreach($reservations as $r) {
+            $r->booked_date = ReservationDate::where('reservation_id', $r->id);
+        }
+
+        return view('admin.pending', ['reservations' => $reservations]);
         
     }
     public function monitoring() {
-        return view('admin.monitoring', ['reservations' => Reservation::where('status', 'approved')->get()]);
+
+        $reservations = Reservation::where('status', 'approved')->get();
+        foreach($reservations as $r) {
+            $r->booked_date = ReservationDate::where('reservation_id', $r->id)->get();
+        }
+        return view('admin.monitoring', ['reservations' => $reservations]);
     }
     public function transactions() {
-        return view('admin.transaction', ['reservations' => Reservation::where('status', 'approved')->get()]);
+        $reservations = Reservation::where('status', 'approved')->get();
+        foreach($reservations as $r) {
+            $r->booked_date = ReservationDate::where('reservation_id', $r->id);
+        }
+        return view('admin.transaction', ['reservations' => $reservations]);
         
     }
     public function view_cancel() {
