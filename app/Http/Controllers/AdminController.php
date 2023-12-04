@@ -6,6 +6,7 @@ use App\Models\Bed;
 use App\Models\Listing;
 use App\Models\Reservation;
 use App\Models\ReservationDate;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,8 +16,6 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
     public function rooms(?string $gender = null) {
-        
-        
 
         if($gender) {
             $rooms = Listing::where('room_gender', $gender)->get();
@@ -71,8 +70,24 @@ class AdminController extends Controller
         return view('admin.history');
         
     }
-    public function inventory() {
-        return view('admin.inventory');
+    public function collections() {
+        return view('admin.collections');
         
     }
+
+    public function create_admin() {
+        return view('admin.add-admin');
+    }
+
+    public function store(Request $request) {
+        $user = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required'
+        ]);
+
+        User::create($user);
+        return back();
+    }
+
 }

@@ -321,12 +321,18 @@
                     <span class="fa fa-star" id="modal_star4"></span>
                 </div>
                 <input type="text" name="name" class="form-control mb-2" placeholder="Your name">
+                @error('name')
+                <p class="text-danger"> {{ $message}} </p>
+            @enderror
                 <input type="hidden" name="rating" id="rating">
                 @error('rating')
                     <p class="text-danger"> {{ $message}} </p>
                 @enderror
                 <textarea name="review" id="" cols="30" rows="2" class="form-control" placeholder="Write a review.."></textarea>
-                </div>
+                @error('review')
+                    <p class="text-danger"> {{ $message}} </p>
+                @enderror
+            </div>
         <div class="modal-footer">
             <button type="button submit" class="btn btn-primary">Submit</button>
         </div>

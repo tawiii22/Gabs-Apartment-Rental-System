@@ -28,12 +28,13 @@ class ReservationController extends Controller
         $reservation = Reservation::create($reservation);
         $reservation->room = Listing::find($request->room_id);
 
-        $reservation_dates = [
-            'reservation_id' => $reservation->id,
-            'booked_date' => $reservation->created_at,
-            'status' => 'unpaid'
-        ];
-        ReservationDate::create($reservation_dates);
+        // $reservation_dates = [
+        //     'reservation_id' => $reservation->id,
+        //     'booked_date' => $reservation->created_at,
+        //     'status' => 'paid',
+
+        // ];
+        // ReservationDate::create($reservation_dates);
 
         return view('users.confirmation', ['reservation' => $reservation]);
     }

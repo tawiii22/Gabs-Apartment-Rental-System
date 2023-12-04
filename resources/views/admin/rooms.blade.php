@@ -11,7 +11,7 @@
                 <a href="/admin/rooms/for-girls">
                     <button type="button" class="btn btn-primary">For girls</button>
                 </a>
-              </div>
+            </div>
         </div>
         <div class="col-2">
             <a href="/admin/add-room">

@@ -12,7 +12,9 @@ class ReviewController extends Controller
     public function store(Listing $listing, Request $request) {
 
         $request->validate([
-            'rating' => 'required'
+            'rating' => 'required',
+            'name' => 'required',
+            'review' => 'required'
         ]);
 
         Review::create([

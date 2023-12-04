@@ -53,7 +53,9 @@ Route::get('/admin/transactions', [AdminController::class, 'transactions']);
 Route::get('/admin/view-cancel', [AdminController::class, 'view_cancel']);
 Route::get('/admin/history', [AdminController::class, 'history']);
 Route::get('/admin/monitoring', [AdminController::class, 'monitoring']);
-Route::get('/admin/inventory', [AdminController::class, 'inventory']);
+Route::get('/admin/collections', [AdminController::class, 'collections']);
+Route::get('/admin/create-admin', [AdminController::class, 'create_admin']);
+Route::post('/admin/create-admin', [AdminController::class, 'store']);
 Route::get('/dashboard/reservations', [HomeController::class, 'show'])->middleware('auth');
 Route::post('/admin/cancel-reservation/{reservation}', [ReservationController::class, 'cancel']);
 Route::post('/admin/approve-reservation/{reservation}', [ReservationController::class, 'approve']);
@@ -76,7 +78,7 @@ Route::get('/', function () {
 // Route::get('/rooms', function () {
 //     return view('users.index', ['listings' => Listing::all()]);
 // });
-Route::get('/rooms', [ListingController::class, 'index']);
+Route::get('/rooms/all/{gender?}', [ListingController::class, 'index']);
 Route::get('/logout', [UserController::class, 'logout']);
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);

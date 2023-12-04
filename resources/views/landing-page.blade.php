@@ -88,7 +88,7 @@
     <a class="navbar-brand" href="#">
       Gab's Apartment
     </a>
-    <a class="navbar-brand" href="/rooms">
+    <a class="navbar-brand" href="/rooms/all">
       View rooms</a>
     <a class="navbar-brand" href="/about">
       About us</a>

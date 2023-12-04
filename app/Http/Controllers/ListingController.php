@@ -10,8 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class ListingController extends Controller
 {
-    public function index() {
-        $listings = Listing::latest()->get();
+    public function index(?string $gender = null) {
+        if($gender) {
+            $listings = Listing::where('room_gender', $gender)->latest()->get();
+        }
+        else {
+            $listings = Listing::latest()->get();
+        }
         foreach($listings as $listing) {
             $reviews = DB::table('reviews')->where('room_id', $listing->id)->sum('rating');
             $reviewsCount = DB::table('reviews')->where('room_id', $listing->id)->count();
@@ -90,6 +95,7 @@ class ListingController extends Controller
             else {
                 $houseImages .= $uploadedFiles[$i]->getClientOriginalName();
             }
+            $uploadedFiles[$i]->move(public_path('images/'), $uploadedFiles[$i]->getClientOriginalName());
         }
         $form = $request->validate([
             'room_name' => 'required',

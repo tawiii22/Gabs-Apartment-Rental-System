@@ -1,7 +1,5 @@
 @extends('master')
 
-@include('components._navbar')
-
 @section('content')
 
 <div >
@@ -11,7 +9,4 @@
             <p class="lead"> </p>
         </div>
         <br><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora dolorum minus, numquam sunt perferendis voluptatibus doloremque laborum. Ipsa repellendus eaque, fuga autem voluptatem temporibus quod dolore provident voluptate, fugit quibusdam.</p>
-
-        
-    
 @endsection

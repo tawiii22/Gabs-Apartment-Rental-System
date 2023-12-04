@@ -58,7 +58,8 @@
                 <a href="/admin/view-cancel" class="list-group-item list-group-item-action {{ request()->is('admin/view-cancel') ? 'active' : '' }} ">View cancel</a>
                 <a href="/admin/history" class="list-group-item list-group-item-action {{ request()->is('admin/history') ? 'active' : '' }} ">History</a>
                 <a href="/admin/monitoring" class="list-group-item list-group-item-action {{ request()->is('admin/monitoring') ? 'active' : '' }} ">Monitoring</a>
-                <a href="/admin/inventory" class="list-group-item list-group-item-action {{ request()->is('admin/inventory') ? 'active' : '' }} ">Inventory</a>
+                <a href="/admin/collections" class="list-group-item list-group-item-action {{ request()->is('admin/collections') ? 'active' : '' }} ">Collections</a>
+                <a href="/admin/create-admin" class="list-group-item list-group-item-action {{ request()->is('admin/create-admin') ? 'active' : '' }} ">Create admin</a>
               </div>
         </div>
         <div class="col-9">

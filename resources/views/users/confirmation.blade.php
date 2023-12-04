@@ -33,6 +33,10 @@
       </tbody>
   </table>
 
+  <a href="/rooms/all">
+    <button class="btn btn-primary">Go back</button>
+    </a>
+
 </div>
 
 @endsection

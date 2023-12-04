@@ -12,7 +12,6 @@
               <th scope="col">Email</th>
               <th scope="col">Gender</th>
               <th scope="col">Date</th>
-              <th scope="col">Payment</th>
             </tr>
           </thead>
           <tbody>
@@ -25,11 +24,6 @@
                 <td>{{ $reservation->email }}</td>
                 <td>{{ $reservation->gender }}</td>
                 <td>{{ $reservation->created_at }}</td>
-                <td>
-                  <button class="btn btn-danger">
-                      he
-                  </button>
-                  </td>
               </tr>
               
             @endforeach

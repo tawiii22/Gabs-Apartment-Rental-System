@@ -43,14 +43,14 @@
                       </div>
                         @for ($i = 0; $i < count($listing->beds); $i++)
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="bed_number" type="radio" id="inlineCheckbox1" value="{{$i+1}}">
+                                <input class="form-check-input" {{ $listing->beds[$i]->status ? "" : "disabled" }} name="bed_number" type="radio" id="inlineCheckbox1" value="{{$i+1}}">
                                 <input class="form-check-input" type="hidden" name="bed_id" id="inlineCheckbox1" value="{{$listing->beds[$i]->id}}">
                                 <label class="form-check-label" for="inlineCheckbox1">Bed {{$i+1}} 
-                                    <button class="btn {{ $listing->beds[$i]->status ? "btn-success" : "btn-danger" }}">{{ $listing->beds[$i]->status ? "Available" : "Not available" }}</button>
+                                    <button class="btn {{ $listing->beds[$i]->status ? "btn-success" : "btn-danger" }}" {{ $listing->beds[$i]->status ? "" : "disabled" }} >{{ $listing->beds[$i]->status ? "Available" : "Not available" }}</button>
                                 </label>
                             </div>
                         @endfor 
-                        @error('bed')
+                        @error('bed_number')
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
                         <input type="hidden" name="payment_process" value="walk in">

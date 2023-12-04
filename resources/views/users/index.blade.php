@@ -85,11 +85,13 @@
 </style>
 <div class="container-fluid mt-5">
 
-    <div class="row">
-        <div class="col">
-            <button class="btn btn-primary">For boys</button>
-            <button class="btn btn-primary">For girls</button>
-        </div>
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="/rooms/all/for-boys">
+            <button type="button" class="btn btn-primary">For boys</button>
+        </a>
+        <a href="/rooms/all/for-girls">
+            <button type="button" class="btn btn-primary">For girls</button>
+        </a>
     </div>
 
 <div class="row" id="roomDiv" name="roomDiv">

@@ -4,7 +4,7 @@
 
 @endphp
 <div class="room col-lg-3 col-md-4 col-sm-6 my-2">
-    <a href="rooms/{{$listing->id}}">
+    <a href="/rooms/{{$listing->id}}">
       <div id="carouselExample{{$listing->id}}" class="carousel slide card" data-bs-ride="carousel">
         <div class="carousel-inner">
             
