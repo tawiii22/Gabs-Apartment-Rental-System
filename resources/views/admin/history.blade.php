@@ -8,7 +8,7 @@
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Contact #</th>
-              <th scope="col">Room type</th>
+              <th scope="col">Room name</th>
               <th scope="col">Email</th>
               <th scope="col">Gender</th>
               <th scope="col">Date</th>

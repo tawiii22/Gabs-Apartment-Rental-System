@@ -18,17 +18,15 @@ class ReservationController extends Controller
         $reservation = $request->validate([
             'room_id' => 'required',
             'fullname' => 'required',
-            'email' => 'required',
-            'contact_no' => 'required',
+            'email' => 'required|unique:reservations',
+            'contact_no' => 'required|unique:reservations',
             'gender' => 'required',
             'bed_number' => 'required',
         ]);
 
-        $bed = Bed::where('room_id', $request->room_id)->where('bed_number', $request->bed_number)->first();
-        $bed->status = 0;
-        $bed->update();
         $reservation['status'] = 'pending';
         $reservation = Reservation::create($reservation);
+        $reservation->room = Listing::find($request->room_id);
 
         $reservation_dates = [
             'reservation_id' => $reservation->id,
@@ -37,10 +35,13 @@ class ReservationController extends Controller
         ];
         ReservationDate::create($reservation_dates);
 
-        return redirect('/confirmation');
+        return view('users.confirmation', ['reservation' => $reservation]);
     }
 
     public function approve(Reservation $reservation) {
+        $bed = Bed::where('room_id', $reservation->room_id)->where('bed_number', $reservation->bed_number)->first();
+        $bed->status = 0;
+        $bed->update();
         $reservation->status = 'approved';
         $reservation->update();
         return redirect('/admin/transactions');
@@ -85,8 +86,6 @@ class ReservationController extends Controller
         return view('dashboard.reservation',(['reservations' => $reservations]));
     }
 
-    public function add_date(Request $request) {
-        dd($request);
-    }
+    
 
 }

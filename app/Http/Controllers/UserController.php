@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -51,9 +52,9 @@ class UserController extends Controller
     
         // Retrieve the user by email (replace 'User' with your actual User model)
         $user = User::where('email', $form['email'])->first();
-    
+        Auth::login($user);
         // Check if the user exists and the password matches (plaintext)
-        if ($user && $user->password === $form['password']) {
+        if (Auth::check()) {
             // Authentication successful
             $request->session()->regenerate();
             return redirect('/admin/dashboard')->with('message', 'You are now logged in!');

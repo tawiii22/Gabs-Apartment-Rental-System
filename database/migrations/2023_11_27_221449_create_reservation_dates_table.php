@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('reservation_id');
             $table->date('booked_date');
+            $table->string('remarks');
+            $table->integer('payment');
             $table->string('status');
             $table->timestamps();
         });

@@ -11,17 +11,17 @@
                         <h5>Personal Information</h5>
 
                         <label for="name">Full Name</label>
-                        <input type="text" id="name" placeholder="Full name" name="fullname" class="form-control my-2">
+                        <input type="text" id="name" placeholder="Full name" value="{{ old('fullname') }}" name="fullname" class="form-control my-2">
                         @error('fullname')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                         <label for="">Email</label>
-                        <input type="text" id="email" name="email" class="form-control my-2" placeholder="Email address">
+                        <input type="text" id="email" name="email" value="{{ old('email') }}" class="form-control my-2" placeholder="Email address">
                         @error('email')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                         <label for="">Contact Number</label>
-                        <input type="number" id="contact_no" name="contact_no" class="form-control my-2" placeholder="Contact Number">
+                        <input type="number" id="contact_no" name="contact_no" value="{{ old('contact_no') }}" class="form-control my-2" placeholder="Contact Number">
                         @error('contact_no')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror

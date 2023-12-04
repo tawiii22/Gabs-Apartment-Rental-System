@@ -84,6 +84,14 @@
 
 </style>
 <div class="container-fluid mt-5">
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary">For boys</button>
+            <button class="btn btn-primary">For girls</button>
+        </div>
+    </div>
+
 <div class="row" id="roomDiv" name="roomDiv">
       
 @foreach ($listings as $listing)

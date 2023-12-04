@@ -7,11 +7,12 @@
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Contact #</th>
-                <th scope="col">Room type</th>
+                <th scope="col">Room name</th>
                 <th scope="col">email</th>
                 <th scope="col">Date</th>
-                <th scope="col">Date</th>
-                
+                <th scope="col">Filter</th>
+                <th scope="col">Payment</th>
+                <th scope="col">Remarks</th>
             </tr>
             
           </thead>
@@ -20,7 +21,7 @@
             <tr>
                 <td>{{ $reservation->fullname }}</td>
                 <td>{{ $reservation->contact_no }}</td>
-                <td>{{ $reservation->id }}</td>
+                <td>{{ $reservation->room->room_name }}</td>
                 <td>{{ $reservation->email }}</td>
                 <td>
                     {{-- {{ $reservation->created_at }} --}}
@@ -34,11 +35,20 @@
                     <form action="/reservation/add-date/{{ $reservation->id }}" method="POST">
                         @csrf
                         <input type="date" name="date">
+                        <input type="number" name="payment">
+                        <select name="remarks" id="cars">
+                            <option value="paid">Paid</option>
+                            <option value="advance">Advance</option>
+                            <option value="partial">Partial</option>
+                        </select>
                         <button class="btn btn-sm btn-success" type="submit">
                             Paid
                         </button>
                     </form>
                 </td>
+                <td>{{ $reservation->email }}</td>
+                <td>{{ $reservation->email }}</td>
+
                 
                 {{-- <td>{{ $reservation->created_at->format('F d, Y') }}
                     <br>

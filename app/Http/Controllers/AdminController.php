@@ -36,8 +36,9 @@ class AdminController extends Controller
     }
     public function pending() {
 
-        $reservations = Reservation::where('status', 'pending')->get();
+        $reservations = Reservation::where('status', 'pending')->latest()->get();
         foreach($reservations as $r) {
+            $r->room = Listing::find($r->room_id);
             $r->booked_date = ReservationDate::where('reservation_id', $r->id);
         }
 
@@ -48,6 +49,7 @@ class AdminController extends Controller
 
         $reservations = Reservation::where('status', 'approved')->get();
         foreach($reservations as $r) {
+            $r->room = Listing::find($r->room_id);
             $r->booked_date = ReservationDate::where('reservation_id', $r->id)->get();
         }
         return view('admin.monitoring', ['reservations' => $reservations]);
@@ -55,6 +57,7 @@ class AdminController extends Controller
     public function transactions() {
         $reservations = Reservation::where('status', 'approved')->get();
         foreach($reservations as $r) {
+            $r->room = Listing::find($r->room_id);
             $r->booked_date = ReservationDate::where('reservation_id', $r->id);
         }
         return view('admin.transaction', ['reservations' => $reservations]);

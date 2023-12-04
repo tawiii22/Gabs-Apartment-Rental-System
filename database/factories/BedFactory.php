@@ -18,7 +18,8 @@ class BedFactory extends Factory
     {
         return [
             //
-            'room_id' => $this->faker->randomDigit(),
+            'room_id' => null,
+            'bed_number' => null,
             'status' => $this->faker->boolean()
         ];
     }
