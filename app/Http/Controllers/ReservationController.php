@@ -87,6 +87,13 @@ class ReservationController extends Controller
         return view('dashboard.reservation',(['reservations' => $reservations]));
     }
 
+    public function done(Reservation $reservation) {
+        $reservation->status = 'done';
+        $reservation->update();
+        return redirect('/admin/history');
+        
+    }
+
     
 
 }

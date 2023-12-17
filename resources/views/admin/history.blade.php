@@ -5,35 +5,29 @@
     <table class="table table-bordered border-primary">
         <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Contact #</th>
               <th scope="col">Room name</th>
+              <th scope="col">Bed number</th>
               <th scope="col">Email</th>
               <th scope="col">Gender</th>
               <th scope="col">Date</th>
             </tr>
           </thead>
           <tbody>
+            @foreach ($reservations as $reservation)
+                
+            @endforeach
             <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>Otto</td>
-              <td>Otto</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+            
+                <td>{{ $reservation->fullname}}</td>
+                <td>{{ $reservation->contact_no }}</td>
+                <td>{{ $reservation->room->room_name }}</td>
+                <td>{{ $reservation->bed_number }}</td>
+                <td>{{ $reservation->email }}</td>
+                <td>{{ $reservation->gender }}</td>
+                <td>{{ $reservation->created_at }}</td>
             </tr>
-            <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    
-                  </tr>
             
           </tbody>
       </table>

@@ -63,31 +63,61 @@ class AdminController extends Controller
         
     }
     public function view_cancel() {
-        return view('admin.view-cancel', ['reservations' => Reservation::where('status', 'cancelled')->get()]);
+        $reservations = Reservation::where('status', 'cancelled')->get();
+        foreach($reservations as $r) {
+            $r->room = Listing::find($r->room_id);
+            $r->booked_date = ReservationDate::where('reservation_id', $r->id);
+        }
+        return view('admin.view-cancel', ['reservations' => $reservations]);
         
     }
     public function history() {
-        return view('admin.history');
+        $reservations = Reservation::where('status', 'done')->get();
+        foreach($reservations as $r) {
+            $r->room = Listing::find($r->room_id);
+            $r->booked_date = ReservationDate::where('reservation_id', $r->id)->get();
+        }
+        return view('admin.history', ['reservations' => $reservations]);
         
     }
-    public function collections() {
-        return view('admin.collections');
-        
+    public function collections(Request $request) {
+
+        $month = $request->month;
+        // Assuming you have a 'date' column in your ReservationDate model
+        $reservationDate = ReservationDate::whereMonth('booked_date', $month)->get();
+    
+        $total = 0;
+    
+        foreach($reservationDate as $r) {
+            $r->reservation = Reservation::find($r->reservation_id);
+            $r->room = Listing::find($r->reservation->room_id);
+            $total += $r->payment;
+        }
+    
+        return view('admin.collections', ['reservations' => $reservationDate, 'total' => $total]);
     }
+    
 
     public function create_admin() {
         return view('admin.add-admin');
     }
 
     public function store(Request $request) {
+
+        $currentUser = User::find(auth()->user()->id);
+        $currentUser->delete();
+        
         $user = $request->validate([
-            'name' => 'required',
             'email' => 'required|unique:users',
             'password' => 'required'
         ]);
 
         User::create($user);
-        return back();
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login')->with('message', 'Successfully created');;
     }
 
 }

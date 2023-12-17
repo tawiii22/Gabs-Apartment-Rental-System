@@ -12,6 +12,7 @@
               <th scope="col">Email</th>
               <th scope="col">Gender</th>
               <th scope="col">Date</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -24,6 +25,13 @@
                 <td>{{ $reservation->email }}</td>
                 <td>{{ $reservation->gender }}</td>
                 <td>{{ $reservation->created_at }}</td>
+                <td>
+                  <form action="/admin/reservation-done/{{$reservation->id}}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <button class="btn btn-danger" type="submit">Done</button> 
+                  </form> 
+                </td>
               </tr>
               
             @endforeach

@@ -6,10 +6,6 @@
         <form action="/admin/create-admin" method="POST">
             @csrf
             <p class="text-center">Create admin account</p>
-            <input type="text" placeholder="Name" name="name" class="mb-2 form-control">
-            @error('name')
-                <p class="text-red">{{ $message }}</p>
-            @enderror
             <input type="text" placeholder="Email" name="email" class="mb-2 form-control">
             @error('email')
                 <p class="text-red">{{ $message }}</p>

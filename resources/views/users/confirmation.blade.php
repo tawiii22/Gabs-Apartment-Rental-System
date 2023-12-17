@@ -5,7 +5,9 @@
 <div class="container text-center">
 
     <h1>CONFIRMATION</h1>
-<h3>You've successfully booked your reservation throught online. You can visit our apartment for the payment.</h3>
+<h3>You've successfully booked your reservation through online. You can visit our apartment for the payment.
+  <p style="color: red;">NOTE: Please screenshot for proof</p>
+</h3>
 
 
 <table class="table table-bordered border-primary">

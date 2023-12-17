@@ -24,17 +24,16 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/')->with('message', 'You logged out?');
+        return redirect('/')->with('message', 'You logged out.');
     }
 
     public function store(Request $request) {
         $form = $request->validate([
-            'name' => ['required', 'min:3'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => ['required', 'confirmed', 'min:6'],
         ]);
         //hash password
-        $form['role'] = 'user';
+        $form['role'] = 'admin';
         $form['password'] = bcrypt($form['password']);
         
         $user = User::create($form);
@@ -49,16 +48,12 @@ class UserController extends Controller
             'email' => ['required', 'email'],
             'password' => 'required'
         ]);
-    
-        // Retrieve the user by email (replace 'User' with your actual User model)
-        $user = User::where('email', $form['email'])->first();
-        Auth::login($user);
-        // Check if the user exists and the password matches (plaintext)
-        if (Auth::check()) {
-            // Authentication successful
+
+        if(Auth::attempt($form)) {
             $request->session()->regenerate();
             return redirect('/admin/dashboard')->with('message', 'You are now logged in!');
-        } else {
+        }
+        else {
             // Authentication failed
             return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
         }

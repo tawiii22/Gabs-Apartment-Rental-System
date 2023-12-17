@@ -8,6 +8,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Contact #</th>
                 <th scope="col">Room name</th>
+                <th scope="col">Bed no.</th>
                 <th scope="col">email</th>
                 <th scope="col">Date</th>
                 <th scope="col">Remarks</th>
@@ -21,6 +22,7 @@
                     <td scope="row">{{ $reservation->fullname }}</td>
                     <td>{{ $reservation->contact_no }}</td>
                     <td>{{ $reservation->room->room_name }}</td>
+                    <td>{{ $reservation->bed_number }}</td>
                     <td>{{ $reservation->email }}</td>
                     <td>
                         @foreach ($reservation->booked_date as $date)

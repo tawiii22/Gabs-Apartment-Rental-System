@@ -63,6 +63,7 @@ Route::get('/admin/add-room', [ListingController::class, 'create']);
 Route::get('/admin/edit-room/{room}', [ListingController::class, 'edit']);
 Route::post('/admin/update-room/{room}', [ListingController::class, 'update']);
 Route::post('/admin/guesthouses/create', [ListingController::class, 'store']);
+Route::put('/admin/reservation-done/{reservation}', [ReservationController::class, 'done']);
 
 Route::get('/about', function () {
     return view('about');

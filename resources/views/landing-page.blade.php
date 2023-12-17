@@ -83,7 +83,7 @@
     }
 
 </style>
-<nav class="navbar bg-body-tertiary">
+<nav class="navbar">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       Gab's Apartment
