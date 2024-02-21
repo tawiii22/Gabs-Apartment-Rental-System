@@ -156,7 +156,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="col-lg-12 col-md-6 col-sm-12" style="margin-bottom: 5px">
             <img src="{{ asset('images/'.$room_image[0]) }}" id="img0" onclick="openFullscreen(this)"
                 class="img-fluid w-100 rounded-left ms-4" style="height: 360px;">
         </div>

@@ -2,25 +2,16 @@
 
 @section('content')
     collections
-    <form action="/admin/collections/" method="GET">
-      @csrf
+  
+      <form action="/admin/collections/" method="GET">
+        @csrf
+    <label for="">Start</label>
+    <input type="date" name="start">
+    <label for="">End</label>
+    <input type="date" name="end">
+    <button class="btn btn-primary" type="submit">Go</button>
+  </form>
 
-      <select name="month" id="">
-        <option value="1">January</option>
-        <option value="2">February</option>
-        <option value="3">March</option>
-        <option value="4">April</option>
-        <option value="5">May</option>
-        <option value="6">June</option>
-        <option value="7">July</option>
-        <option value="8">August</option>
-        <option value="9">September</option>
-        <option value="10">October</option>
-        <option value="11">Novermber</option>
-        <option value="12">December</option>
-      </select>
-      <button class="btn btn-primary" type="submit">Go</button>
-    </form>
     <table class="table table-bordered border-primary">
         <thead>
             <tr>

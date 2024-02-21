@@ -20,7 +20,6 @@ class ReservationController extends Controller
             'fullname' => 'required',
             'email' => 'required|unique:reservations',
             'contact_no' => 'required|unique:reservations',
-            'gender' => 'required',
             'bed_number' => 'required',
         ]);
 
@@ -41,6 +40,11 @@ class ReservationController extends Controller
 
     public function approve(Reservation $reservation) {
         $bed = Bed::where('room_id', $reservation->room_id)->where('bed_number', $reservation->bed_number)->first();
+        $reservations = Reservation::where('bed_number', $reservation->bed_number)->where('room_id', $reservation->room_id)->where('id', '!=', $reservation->id)->get();
+        foreach($reservations as $r) {
+            $r->status = 'cancelled';
+            $r->update();
+        }
         $bed->status = 0;
         $bed->update();
         $reservation->status = 'approved';

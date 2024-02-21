@@ -23,13 +23,13 @@
                 <td>{{ $reservation->contact_no }}</td>
                 <td>{{ $reservation->room->room_name }}</td>
                 <td>{{ $reservation->email }}</td>
-                <td>{{ $reservation->gender }}</td>
+                <td>{{ $reservation->room->room_gender}}</td>
                 <td>{{ $reservation->created_at }}</td>
                 <td>
                   <form action="/admin/reservation-done/{{$reservation->id}}" method="POST">
                     @csrf
                     @method('PUT')
-                    <button class="btn btn-danger" type="submit">Done</button> 
+                    <button class="btn btn-danger" type="submit">Move out</button> 
                   </form> 
                 </td>
               </tr>
@@ -37,4 +37,5 @@
             @endforeach
           </tbody>
       </table>
+      
 @endsection

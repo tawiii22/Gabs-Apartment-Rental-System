@@ -24,7 +24,7 @@
                 <td>{{ $reservation->room->room_name }}</td>
                 <td>{{ $reservation->bed_number }}</td>
                 <td>{{ $reservation->email }}</td>
-                <td>{{ $reservation->gender }}</td>
+                <td>{{ $reservation->room->room_gender }}</td>
                 <td>{{ $reservation->created_at }}</td>
                 
               </tr>

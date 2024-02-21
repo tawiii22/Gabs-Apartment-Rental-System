@@ -19,7 +19,7 @@
           <th scope="col">Room name</th>
           <th scope="col">Date</th>
           <th scope="col">Bed number</th>
-          <th scope="col">Gender</th>
+          <th scope="col">Room type</th>
         </tr>
       </thead>
       <tbody>
@@ -30,7 +30,7 @@
                 <td>{{ $reservation->room->room_name }} </td>
                 <td>{{ $reservation->created_at }} </td>
                 <td>{{ $reservation->bed_number }} </td>
-                <td>{{ $reservation->gender }} </td>
+                <td>{{ $reservation->room->room_gender }} </td>
             </tr>
       </tbody>
   </table>

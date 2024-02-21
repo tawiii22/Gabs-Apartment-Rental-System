@@ -23,7 +23,7 @@
                 <td>{{ $reservation->contact_no }}</td>
                 <td>{{ $reservation->room->room_name }}</td>
                 <td>{{ $reservation->email }}</td>
-                <td>{{ $reservation->gender }}</td>
+                <td>{{ $reservation->room->room_gender }}</td>
                 <td>{{ $reservation->created_at }}</td>
                 <td>
                     <form method="POST" action="/admin/approve-reservation/{{ $reservation->id }}">

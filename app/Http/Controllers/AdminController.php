@@ -81,10 +81,16 @@ class AdminController extends Controller
         
     }
     public function collections(Request $request) {
-
-        $month = $request->month;
-        // Assuming you have a 'date' column in your ReservationDate model
-        $reservationDate = ReservationDate::whereMonth('booked_date', $month)->get();
+        $start = $request->start;
+        $end = $request->end;
+    
+        if ($start && $end) {
+            // If both start and end dates are provided, filter reservations
+            $reservationDate = ReservationDate::whereBetween('booked_date', [$start, $end])->get();
+        } else {
+            // If start or end dates are not provided or are null, retrieve all reservations
+            $reservationDate = ReservationDate::all();
+        }
     
         $total = 0;
     
@@ -97,6 +103,7 @@ class AdminController extends Controller
         return view('admin.collections', ['reservations' => $reservationDate, 'total' => $total]);
     }
     
+    
 
     public function create_admin() {
         return view('admin.add-admin');
@@ -104,8 +111,8 @@ class AdminController extends Controller
 
     public function store(Request $request) {
 
-        $currentUser = User::find(auth()->user()->id);
-        $currentUser->delete();
+        // $currentUser = User::find(auth()->user()->id);
+        // $currentUser->delete();
         
         $user = $request->validate([
             'email' => 'required|unique:users',

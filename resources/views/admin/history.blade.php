@@ -16,18 +16,18 @@
           </thead>
           <tbody>
             @foreach ($reservations as $reservation)
-                
-            @endforeach
             <tr>
             
-                <td>{{ $reservation->fullname}}</td>
-                <td>{{ $reservation->contact_no }}</td>
-                <td>{{ $reservation->room->room_name }}</td>
-                <td>{{ $reservation->bed_number }}</td>
-                <td>{{ $reservation->email }}</td>
-                <td>{{ $reservation->gender }}</td>
-                <td>{{ $reservation->created_at }}</td>
-            </tr>
+              <td>{{ $reservation->fullname}}</td>
+              <td>{{ $reservation->contact_no }}</td>
+              <td>{{ $reservation->room->room_name }}</td>
+              <td>{{ $reservation->bed_number }}</td>
+              <td>{{ $reservation->email }}</td>
+              <td>{{ $reservation->room->room_gender }}</td>
+              <td>{{ $reservation->created_at }}</td>
+          </tr>
+            @endforeach
+           
             
           </tbody>
       </table>

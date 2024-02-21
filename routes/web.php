@@ -2,6 +2,8 @@
 
 use App\Models\User;
 use App\Models\Listing;
+use App\Models\Bed;
+use App\Models\Review;
 use App\Models\Wishlist;
 use App\Models\GuestHouses;
 use App\Models\Reservation;
@@ -108,7 +110,14 @@ Route::get('test', function() {
 
 
 
-
+Route::get('/demo', function(){
+    $data = null;
+    $listing = Listing::find(6);
+    $listing->beds = Bed::where('room_id', $listing->id)->get();
+        $listing->reviews = Review::where('room_id', $listing->id)->get();
+    
+    return response()->json($listing);
+});
 
 
 

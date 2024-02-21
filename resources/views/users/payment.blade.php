@@ -25,7 +25,7 @@
                         @error('contact_no')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
-                        <label for="">Gender</label>
+                        {{-- <label for="">Gender</label>
                         <div class="form-check">
                         <input value="Male" class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" checked>
                         @error('gender')
@@ -40,7 +40,7 @@
                         <label class="form-check-label" for="flexRadioDefault2">
                             Female
                         </label>
-                      </div>
+                      </div> --}}
                         @for ($i = 0; $i < count($listing->beds); $i++)
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" {{ $listing->beds[$i]->status ? "" : "disabled" }} name="bed_number" type="radio" id="inlineCheckbox1" value="{{$i+1}}">
