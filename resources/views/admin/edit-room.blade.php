@@ -56,7 +56,7 @@
       </div>
      
       <div class="form-group text-center mt-4">
-        <button type="submit" class="btn btn-success rounded-pill px-5 py-3 mb-5">Update Room</button>
+        <button type="submit" class="btn btn-primary rounded-pill px-5 py-3 mb-5">Update Room</button>
       </div>
         </div>
       </div>

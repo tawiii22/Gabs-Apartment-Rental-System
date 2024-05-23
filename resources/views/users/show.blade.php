@@ -5,8 +5,8 @@
 <style>
 
     .img-fluid:hover {
-        opacity: 0.8;
         cursor: pointer;
+      transform: scale(1.02);
     }
 
     .rounded-left {
@@ -134,6 +134,7 @@
     }
 </style>
 
+<body style="background-color:  rgb(236, 236, 236)">
 <div class="container" style="margin-bottom: 100px;">
     <div class="row">
         <div class="col-12">
@@ -152,26 +153,26 @@
     </div>
     <div class="row mb-2">
         <div class="col-8 text-start">
-            heloo
+            <h2>Gabi</h2>   
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12 col-md-6 col-sm-12" style="margin-bottom: 5px">
+        <div class="col-lg-12 col-md-6 col-sm-12" style="margin-bottom: 5px;">
             <img src="{{ asset('images/'.$room_image[0]) }}" id="img0" onclick="openFullscreen(this)"
-                class="img-fluid w-100 rounded-left ms-4" style="height: 360px;">
+                class="img-fluid w-100 " style="height: 360px; border: 3px solid; border-radius: 10px;">
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6">
             <div class="row">
                 <div class="col-12">
                     <img src="{{ asset('images/'.$room_image[1]) }}" id="" onclick="openFullscreen(this)"
-                        class="img-fluid object-fit-cover ms-2 w-100" style="height: 175px; margin-bottom: 5px;">
+                        class="img-fluid object-fit-cover ms-2 w-100" style="height: 175px; border: 3px solid; margin: 10%; border-radius: 10px;">
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     
                     <img src="{{ asset('images/'.$room_image[2]) }}" id="" onclick="openFullscreen(this)"
-                        class="img-fluid object-fit-cover ms-2" style="height: 175px; width: 400px; margin-top: 5px;">
+                        class="img-fluid object-fit-cover ms-2" style="height: 175px; width: 400px; border: 3px solid; margin: 10px; border-radius: 10px;">
                 </div>
             </div>
         </div>
@@ -179,8 +180,8 @@
             <div class="row">
                 <div class="col-12 image-container">
                     <img src="{{asset('images/'.$room_image[3])}}" id="img3" onclick="openFullscreen(this)"
-                        class="img-fluid object-fit-cover rounded-top-right w-100"
-                        style="height: 175px; margin-bottom: 5px;">
+                        class="img-fluid object-fit-cover w-100"
+                        style="height: 175px; border: 3px solid; margin: 10%; border-radius: 10px;">
                     <button class="btn btn-light me-4 mt-2 btn-sm top-right-button btn-transparent" id="showAllButton"
                         data-bs-toggle="offcanvas" data-bs-target="#imageOffcanvas"><i class="bi bi-layers"></i> Show
                         all
@@ -190,8 +191,8 @@
             <div class="row">
                 <div class="col-12">
                     <img src="{{ asset('images/'.$room_image[4]) }}" id="" onclick="openFullscreen(this)"
-                        class="img-fluid object-fit-fill rounded-bottom-right w-100"
-                        style="height: 175px; margin-top: 5px;">
+                        class="img-fluid object-fit-fill w-100"
+                        style="height: 175px; margin-left: 30px; border: 3px solid; margin-top: 10px; border-radius: 10px;">
                 </div>
             </div>
         </div>
@@ -205,13 +206,13 @@
                     <div class="h5 mx-5 text-dark" id="house_desc"> {{ $listing->room_details }} </div>
                 </li>
                 <li>
-                    <div class="h5 mx-5 text-dark" id="house_location"> Located in {{ $listing->room_location }} </div>
+                    <div class="h5 mx-5 text-dark" id="house_location"> Located in Gabi {{ $listing->room_location }} </div>
                 </li>
                
                 @for ($i = 0; $i < count($listing->beds); $i++)
                 <li>
                     <div class="h5 mx-5 text-dark" id="house_location"> Bed {{$i+1}}
-                        <button class="btn {{ $listing->beds[$i]->status ? "btn-success" : "btn-danger" }}">{{ $listing->beds[$i]->status ? "Available" : "Not available" }}</button>    
+                        <button class="btn {{ $listing->beds[$i]->status ? "btn-primary" : "btn-dark" }}">{{ $listing->beds[$i]->status ? "Available" : "Not available" }}</button>    
                     </div>
                 </li>
                 @endfor
@@ -278,7 +279,7 @@
                     <h3 class="card-title">Price details</h3>
                     <p class="card-text">Monthly Fee <label for="" style="margin-left: 135px;"
                             id="house_price">₱{{ $listing->room_price }}</label></p>
-                            <button type="submit" class="btn btn-success form-control" id="reserveBtn">Reserve Now</button>
+                            <button type="submit" class="btn btn-primary form-control" id="reserveBtn">Reserve Now</button>
                 </div>
                 </form>
             </div>
@@ -340,6 +341,7 @@
     </form>
     </div>
   </div> 
+</body>
 
 <script>
     function openFullscreen(img) {

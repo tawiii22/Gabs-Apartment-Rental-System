@@ -91,6 +91,25 @@ class ReservationController extends Controller
         return view('dashboard.reservation',(['reservations' => $reservations]));
     }
 
+    public function markAsMovedOut(Request $request, Reservation $reservation)
+    {
+       
+        $bed = Bed::where('room_id', $reservation->room_id)
+                   ->where('bed_number', $reservation->bed_number)
+                   ->first();
+   
+        $bed->status = 1;
+        $bed->save();
+    
+   
+        $reservation->status = 'done';
+        $reservation->save();
+    
+        return redirect()->back()->with('success', 'Bed marked as moved out successfully.');
+    }
+    
+    
+
     public function done(Reservation $reservation) {
         $reservation->status = 'done';
         $reservation->update();

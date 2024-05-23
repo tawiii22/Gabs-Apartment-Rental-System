@@ -13,7 +13,7 @@
  
 
     .card-body span {
-      font-size: 12px
+      font-size: 12px;
     }
 
     .truncate-text-title {
@@ -42,8 +42,9 @@
     }
 
     .card:hover {
-      transform: scale(1.05);
-      border-color: #ffc107;
+      transform: scale(1.02);
+      border-radius: 10px;
+      border-color: black;
       
     }
     
@@ -81,18 +82,45 @@
       color: black;
       border-bottom: 4px solid gray;
     }
+    
 
 </style>
-<div class="container-fluid mt-8">
+<body>
+  <nav class="navbar navbar-expand-lg" style="background: rgba(0,0,0,0.1);">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        Gab's Apartment
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav" style="margin-left: 75%; font-size: 18px;">
+          <li class="nav-item">
+            <a class="nav-link" href="/rooms/all">Rooms</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid mt-8">
 
-    <div class="btn-group" role="group" aria-label="Basic example">
+    <div class="btn-group pt-3" role="group" aria-label="Basic example">
         <a href="/rooms/all/for-boys">
-            <button type="button" class="btn btn-primary">For boys</button>
+            <button type="button" class="btn btn-primary" style="margin-right: 5px"><b>For boys</b></button>
         </a>
         <a href="/rooms/all/for-girls">
-            <button type="button" class="btn btn-primary">For girls</button>
+            <button type="button" class="btn btn-primary"><b>For girls</b></button>
         </a>
     </div>
+    <br>
+    <br>
 
 <div class="row" id="roomDiv" name="roomDiv">
       
@@ -103,6 +131,8 @@
 @endforeach
 </div>
 </div>
+</body>
+
 <!-- @include('components._footer') -->
 
 @endsection

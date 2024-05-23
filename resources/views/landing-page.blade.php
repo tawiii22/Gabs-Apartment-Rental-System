@@ -1,103 +1,85 @@
 @extends('master')
 @section('title', 'Home')
 @section('content')
+
 <style>
-    .truncate-text {
-      display: -webkit-box;
-      -webkit-line-clamp: 2; /* Adjust the number of lines to show */
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+  /* Hero Section Styling */
+  .container-fluid {
+    padding: 0;
+  }
 
- 
+  .hero-section {
+    position: relative;
+  }
 
-    .card-body span {
-      font-size: 12px
-    }
+  .hero-section img {
+    width: 100%;
+    height: auto;
+  }
 
-    .truncate-text-title {
-      display: -webkit-box;
-      -webkit-line-clamp: 1; /* Adjust the number of lines to show */
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    
-    .container-fluid {
-      padding-left: 50px;
-      padding-right: 50px
-    }
+  .hero-content {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+    font-weight: 600;
+  }
 
-    .card:hover {
-      cursor: pointer;
-    }
+  .hero-content h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
 
-    .card:hover .truncate-text{
-      -webkit-line-clamp: unset;
-    }
+  .hero-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
 
-    .card:hover .truncate-text-title{
-      -webkit-line-clamp: unset;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-      border-color: #ffc107;
-      
-    }
-    
-    .card-img-overlay {
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .room:hover .carousel-control-prev .carousel-control-prev-icon,
-    .room:hover .carousel-control-next .carousel-control-next-icon {
-      background-color: black
-    }
-    
-    .card:hover .card-img-overlay {
-      opacity: 1;
-    }
-
-    .card i {
-      margin-top: 5px;
-      font-size: 20px;
-    }
-
-    .icon-text {
-      font-size: 13px;
-    }
-
-    .col .card {
-      border: none;
-      color: gray;
-      box-sizing: border-box;
-      height: 57px;
-    }
-
-    .col .card:hover {
-      color: black;
-      border-bottom: 4px solid gray;
-    }
-
+  .hero-content .btn {
+    font-size: 18px;
+    padding: 5px 15px;
+  }
 </style>
-<nav class="navbar">
-  <div class="container-fluid">
+
+<nav class="navbar navbar-expand-lg" style="background: rgba(0,0,0,0.1);">
+  <div class="container">
     <a class="navbar-brand" href="#">
       Gab's Apartment
     </a>
-    <a class="navbar-brand" href="/rooms/all">
-      View rooms</a>
-    <a class="navbar-brand" href="/about">
-      About us</a>
-      <a class="navbar-brand" href="/login">
-        Login</a>
-    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav" style="margin-left: 75%; font-size: 18px;">
+        <li class="nav-item">
+          <a class="nav-link" href="/rooms/all">Rooms</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
-<img src="{{asset('images/room1.jpg')}}" alt="" class="img-fluid" width="100%" height="100%">
-<!-- @include('components._footer') -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div style="position: relative;">
+        <img src="{{asset('images/room1.jpg')}}" alt="" class="img-fluid" width="100%" height="100%">
+        <div class="hero-content">
+          <h1>Welcome to Gab's Apartment</h1>
+          <p>Experience luxury and comfort like never before!</p>
+          <a href="/rooms/all" class="btn btn-secondary">Explore Our Rooms</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 @endsection

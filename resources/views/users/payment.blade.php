@@ -1,7 +1,7 @@
 @extends('master')
 @section('title', 'Confirm Payment')
 @section('content')
-    
+    <body style="background-color:  rgb(236, 236, 236)">
     <div class="container">
         <div class="row mt-5">
             <div class="col-lg-6">
@@ -46,7 +46,7 @@
                                 <input class="form-check-input" {{ $listing->beds[$i]->status ? "" : "disabled" }} name="bed_number" type="radio" id="inlineCheckbox1" value="{{$i+1}}">
                                 <input class="form-check-input" type="hidden" name="bed_id" id="inlineCheckbox1" value="{{$listing->beds[$i]->id}}">
                                 <label class="form-check-label" for="inlineCheckbox1">Bed {{$i+1}} 
-                                    <button class="btn {{ $listing->beds[$i]->status ? "btn-success" : "btn-danger" }}" {{ $listing->beds[$i]->status ? "" : "disabled" }} >{{ $listing->beds[$i]->status ? "Available" : "Not available" }}</button>
+                                    <button class="btn {{ $listing->beds[$i]->status ? "btn-primary" : "btn-dark" }}" {{ $listing->beds[$i]->status ? "" : "disabled" }} >{{ $listing->beds[$i]->status ? "Available" : "Not available" }}</button>
                                 </label>
                             </div>
                         @endfor 
@@ -83,6 +83,7 @@
             </div>
         </div>
     </div>
+    </body>
 
 <script src="https://www.paypal.com/sdk/js?client-id=ARvqGCp7R4gLQgzgpGElbfWh8OGfx6WfpQSYmVFUeegiEVrRkFbquSHDo9Am6agbABFhvU-8_d-2f2D4"></script>
 <script>

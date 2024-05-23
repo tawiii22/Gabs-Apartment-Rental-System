@@ -3,7 +3,12 @@
 
 
 @endphp
-<div class="room col-6">
+<style>
+  div{
+   
+  }
+</style>
+<div class="room col-4 mb-4" >
     <a href="/rooms/{{$listing->id}}">
       <div id="carouselExample{{$listing->id}}" class="carousel slide card" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -11,7 +16,7 @@
           <x-gh-card-img :cardimg="$listing->room_image" />          
 
         </div>
-        <div class="card-body">
+        <div class="card-body p-2">
           <div class="room-name row ">
             <div class="col-8">
               <h5 class="truncate-text-title"> {{$listing->room_name}} </h5>

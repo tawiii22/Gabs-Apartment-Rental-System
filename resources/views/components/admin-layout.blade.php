@@ -1,73 +1,90 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <link rel="icon" href="{{ asset('images/logo/logo.png') }}" style="object-fit: cover;">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-xxxxx" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@200&family=Questrial&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title> @yield('title') </title>
-  <style>
-   
-    body {
-        font-family: 'Questrial', sans-serif;
-    }
+    <title>@yield('title')</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Questrial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-    a {
-      text-decoration: none;
-      color: black;
-    }
+        .sidebar {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
 
-    .profile_avatar {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    margin-right: 10px;
-    object-fit: cover;
-  }
-    
-  </style>
+        .sidebar a {
+            padding: 5px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: black;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #abbcce;
+        }
+
+        .active {
+            background-color: rgb(233, 233, 233);
+            color: black;
+        }
+
+        .content {
+            margin-left: 200px;
+            padding: 20px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .logo img {
+            max-width: 50px;
+        }
+    </style>
 </head>
 
 <body>
 
-  <form action="/logout" method="GET">
-    <button class="btn btn-danger">Logout</button>
-  </form>
+    @auth
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{{ asset('images/logo/logo.png') }}" alt="Logo">
+        </div>
+        <hr>
+        <a href="/admin/dashboard" class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">Dashboard</a>
+        <a href="/admin/rooms" class="{{ request()->is('admin/rooms') ? 'active' : '' }}">Rooms</a>
+        <a href="/admin/pending" class="{{ request()->is('admin/pending') ? 'active' : '' }}">Pending</a>
+        <a href="/admin/transactions" class="{{ request()->is('admin/transactions') ? 'active' : '' }}">Transaction</a>
+        <a href="/admin/view-cancel" class="{{ request()->is('admin/view-cancel') ? 'active' : '' }}">View cancel</a>
+        <a href="/admin/history" class="{{ request()->is('admin/history') ? 'active' : '' }}">History</a>
+        <a href="/admin/monitoring" class="{{ request()->is('admin/monitoring') ? 'active' : '' }}">Monitoring</a>
+        <a href="/admin/collections" class="{{ request()->is('admin/collections') ? 'active' : '' }}">Collections</a>
+        <a href="/admin/create-admin" class="{{ request()->is('admin/create-admin') ? 'active' : '' }}">Create admin</a>
+        <hr>
+        <form action="/logout" method="GET" class="mx-3">
+            <button class="btn btn-sm btn-dark">Logout</button>
+        </form>
+    </div>
+    @endauth
 
-    <div class="row">
-        <div class="col-3">
-            <div class="list-group mt-5">
-                <a href="/admin/dashboard" class="list-group-item list-group-item-action {{ request()->is('admin/dashboard') ? 'active' : '' }}" aria-current="true">
-                  Dashboard
-                </a>
-                <a href="/admin/rooms" class="list-group-item list-group-item-action {{ request()->is('admin/rooms') ? 'active' : '' }} ">Rooms</a>
-                <a href="/admin/pending" class="list-group-item list-group-item-action {{ request()->is('admin/pending') ? 'active' : '' }} ">Pending</a>
-                <a href="/admin/transactions" class="list-group-item list-group-item-action {{ request()->is('admin/transactions') ? 'active' : '' }} ">Transaction</a>
-                <a href="/admin/view-cancel" class="list-group-item list-group-item-action {{ request()->is('admin/view-cancel') ? 'active' : '' }} ">View cancel</a>
-                <a href="/admin/history" class="list-group-item list-group-item-action {{ request()->is('admin/history') ? 'active' : '' }} ">History</a>
-                <a href="/admin/monitoring" class="list-group-item list-group-item-action {{ request()->is('admin/monitoring') ? 'active' : '' }} ">Monitoring</a>
-                <a href="/admin/collections" class="list-group-item list-group-item-action {{ request()->is('admin/collections') ? 'active' : '' }} ">Collections</a>
-                <a href="/admin/create-admin" class="list-group-item list-group-item-action {{ request()->is('admin/create-admin') ? 'active' : '' }} ">Create admin</a>
-              </div>
-        </div>
-        <div class="col-9">
-              @yield('content')
-        </div>
+    <div class="content">
+        @yield('content')
     </div>
 
-  </body>
+</body>
 
 </html>
-

@@ -57,8 +57,9 @@ html {
     border-radius: 10px 10px 10px 10px;
     background: #fff;
     padding: 30px;
+    height: 450px;
     width: 600px;
-    max-width: 500px;
+    max-width: 700px;
     position: relative;
     padding: 0px;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
@@ -93,7 +94,8 @@ html {
   /* FORM TYPOGRAPHY*/
   
   input[type=button], input[type=submit], input[type=reset]  {
-    background-color: #56baed;
+    background-color: BLACK;
+    width: 50%;
     border: none;
     color: white;
     padding: 15px 80px;
@@ -274,29 +276,57 @@ html {
     width:60%;
   }
 
+
   
 </style>
 <body>
+  <nav class="navbar navbar-expand-lg" style="background: rgba(0,0,0,0.1);">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        Gab's Apartment
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav" style="margin-left: 75%; font-size: 18px;">
+          <li class="nav-item">
+            <a class="nav-link" href="/rooms/all">Rooms</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
     <div class="wrapper fadeInDown">
       <form method="POST" action="/users/authenticate">
         @csrf
         <div id="formContent">
             <div class="fadeIn first">
+              <br> <br>
                 <div class="row text-center">
-                    <p class="h4 pt-3" ><i class="fa fa-address-card-o" aria-hidden="true"></i> Admin login </p>
+                    <p class="h4 pt-1" ><i class="fa fa-address-card-o" aria-hidden="true"></i> Admin login </p>
                 </div>
             </div>
+            <br>
             <div>
                 <input type="text" id="email" value="{{ old('email') }}" class="fadeIn second" name="email" placeholder="Email">
                 @error('email')
-                  <br><i class="text-danger"> {{ $message }} </i><br>
+                  <br><br><i class="text-danger"> {{ $message }} </i><br>
                   <style> #email { border: 1px solid red } </style>
                 @enderror
                 <input type="password" id="password" value="{{ old('password') }}" class="fadeIn third mt-3" name="password" placeholder="Password">
                 @error('password')
-                  <br><i class="text-danger"> {{ $message }} </i><br>
+                  <br><br><i class="text-danger"> {{ $message }} </i><br>
                   <style> #password { border: 1px solid red } </style>
                 @enderror
+                <br><br>
                 <input type="submit" class="fadeIn my-2 fourth " id="btn-login" value="Log In">
 
             </div>
