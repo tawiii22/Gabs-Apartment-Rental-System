@@ -48,24 +48,30 @@
 
     Route::post('/rooms/rate/{listing}', [ReviewController::class, 'store']);
 
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
-    Route::get('/admin/rooms/{gender?}', [AdminController::class, 'rooms']);
-    Route::get('/admin/pending', [AdminController::class, 'pending']);
-    Route::get('/admin/transactions', [AdminController::class, 'transactions']);
-    Route::get('/admin/view-cancel', [AdminController::class, 'view_cancel']);
-    Route::get('/admin/history', [AdminController::class, 'history']);
-    Route::get('/admin/monitoring', [AdminController::class, 'monitoring']);
-    Route::get('/admin/collections', [AdminController::class, 'collections']);
-    Route::get('/admin/create-admin', [AdminController::class, 'create_admin']);
-    Route::post('/admin/create-admin', [AdminController::class, 'store']);
-    Route::get('/dashboard/reservations', [HomeController::class, 'show'])->middleware('auth');
-    Route::post('/admin/cancel-reservation/{reservation}', [ReservationController::class, 'cancel']);
-    Route::post('/admin/approve-reservation/{reservation}', [ReservationController::class, 'approve']);
-    Route::get('/admin/add-room', [ListingController::class, 'create']);
-    Route::get('/admin/edit-room/{room}', [ListingController::class, 'edit']);
-    Route::post('/admin/update-room/{room}', [ListingController::class, 'update']);
-    Route::post('/admin/guesthouses/create', [ListingController::class, 'store']);
-    Route::put('/admin/reservations/{reservation}/move-out', [ReservationController::class, 'markAsMovedOut'])->name('reservations.moveOut');
+    Route::middleware(['auth'])->group(function() {
+
+        Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+        Route::get('/admin/rooms/{gender?}', [AdminController::class, 'rooms']);
+        Route::get('/admin/pending', [AdminController::class, 'pending']);
+        Route::get('/admin/transactions', [AdminController::class, 'transactions']);
+        Route::get('/admin/view-cancel', [AdminController::class, 'view_cancel']);
+        Route::get('/admin/history', [AdminController::class, 'history']);
+        Route::get('/admin/monitoring', [AdminController::class, 'monitoring']);
+        Route::get('/admin/collections', [AdminController::class, 'collections']);
+        Route::get('/admin/create-admin', [AdminController::class, 'create_admin']);
+        Route::post('/admin/create-admin', [AdminController::class, 'store']);
+        // Route::get('/dashboard/reservations', [HomeController::class, 'show'])->middleware('auth');
+        Route::post('/admin/cancel-reservation/{reservation}', [ReservationController::class, 'cancel']);
+        Route::post('/admin/approve-reservation/{reservation}', [ReservationController::class, 'approve']);
+        Route::get('/admin/add-room', [ListingController::class, 'create']);
+        Route::get('/admin/edit-room/{room}', [ListingController::class, 'edit']);
+        Route::post('/admin/update-room/{room}', [ListingController::class, 'update']);
+        Route::post('/admin/guesthouses/create', [ListingController::class, 'store']);
+        Route::put('/admin/reservations/{reservation}/move-out', [ReservationController::class, 'markAsMovedOut'])->name('reservations.moveOut');
+
+    });
+
+
 
     Route::get('/about', function () {
         return view('about');
@@ -95,7 +101,7 @@
     Route::get('/guesthouses/create', [ListingController::class, 'create'])->middleware('auth');
     Route::post('/reservation/add-date/{reservation}', [ReservationDateController::class, 'store']);
 
-    Route::get('/search', [SearchController::class, 'search']);
+    // Route::get('/search', [SearchController::class, 'search']);
 
 
     Route::get('/about', function() {
