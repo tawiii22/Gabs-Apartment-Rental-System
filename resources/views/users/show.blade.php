@@ -161,43 +161,34 @@
             <img src="{{ asset('images/'.$room_image[0]) }}" id="img0" onclick="openFullscreen(this)"
                 class="img-fluid w-100 " style="height: 360px; border: 3px solid; border-radius: 10px;">
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6">
+            <button class="btn btn-light me-4 my-2 btn-sm btn-transparent" id="showAllButton"
+                data-bs-toggle="offcanvas" style="border: 1px solid;" data-bs-target="#imageOffcanvas"><i class="bi bi-layers"></i> Show
+                all
+                images</button>
             <div class="row">
-                <div class="col-12">
+                <div class="col-4">
                     <img src="{{ asset('images/'.$room_image[1]) }}" id="" onclick="openFullscreen(this)"
-                        class="img-fluid object-fit-cover ms-2 w-100" style="height: 175px; border: 3px solid; margin: 10%; border-radius: 10px;">
+                        class="img-fluid object-fit-cover  w-100" style="height: 175px; border: 3px solid;  border-radius: 10px;">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    
+                <div class="col-4">
                     <img src="{{ asset('images/'.$room_image[2]) }}" id="" onclick="openFullscreen(this)"
-                        class="img-fluid object-fit-cover ms-2" style="height: 175px; width: 400px; border: 3px solid; margin: 10px; border-radius: 10px;">
+                        class="img-fluid object-fit-cover " style="height: 175px; width: 400px; border: 3px solid; border-radius: 10px;">
                 </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6">
-            <div class="row">
-                <div class="col-12 image-container">
+                <div class="col-4">
                     <img src="{{asset('images/'.$room_image[3])}}" id="img3" onclick="openFullscreen(this)"
                         class="img-fluid object-fit-cover w-100"
-                        style="height: 175px; border: 3px solid; margin: 10%; border-radius: 10px;">
-                    <button class="btn btn-light me-4 mt-2 btn-sm top-right-button btn-transparent" id="showAllButton"
-                        data-bs-toggle="offcanvas" data-bs-target="#imageOffcanvas"><i class="bi bi-layers"></i> Show
-                        all
-                        images</button>
+                        style="height: 175px; border: 3px solid;  border-radius: 10px;">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
+                <div class="col-4">
                     <img src="{{ asset('images/'.$room_image[4]) }}" id="" onclick="openFullscreen(this)"
-                        class="img-fluid object-fit-fill w-100"
-                        style="height: 175px; margin-left: 30px; border: 3px solid; margin-top: 10px; border-radius: 10px;">
+                        class="img-fluid object-fit-fill w-100 mt-2"
+                        style="height: 175px; border: 3px solid; border-radius: 10px;">
                 </div>
             </div>
         </div>
     </div>
-    <hr>
+    <div class="container">
+        <hr>
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-12">
             <div class="h4 text-dark">About this place</div>
@@ -208,7 +199,6 @@
                 <li>
                     <div class="h5 mx-5 text-dark" id="house_location"> Located in Gabi {{ $listing->room_location }} </div>
                 </li>
-               
                 @for ($i = 0; $i < count($listing->beds); $i++)
                 <li>
                     <div class="h5 mx-5 text-dark" id="house_location"> Bed {{$i+1}}
@@ -285,6 +275,7 @@
             </div>
         </div>
     </div>
+    </div>
 </div>
 <div class="offcanvas offcanvas-container" tabindex="-1" id="imageOffcanvas" aria-labelledby="imageOffcanvasLabel">
     <div class="offcanvas-content">
@@ -295,9 +286,11 @@
         <div class="offcanvas-body">
             <div id="imageGallery" class="row">
                     @for($i = 0; $i < count($room_image); $i++)
-                    <img src="{{ asset('images/'.$room_image[$i]) }}" id="" onclick="openFullscreen(this)"
-                    class="img-fluid object-fit-fill rounded-bottom-right w-25"
-                            style="height: 175px; margin-top: 5px;">
+                    <div class="col-4">
+                        <img src="{{ asset('images/'.$room_image[$i]) }}" id="" onclick="openFullscreen(this)"
+                            class="img-fluid object-fit-fill w-100 m-3"
+                            style="height: 250px">
+                    </div>
                     @endfor
             </div>
         </div>
